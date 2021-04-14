@@ -3,7 +3,7 @@
     <ul>
       <li v-for="todo in todos" :key="todo.id">
         <input type="checkbox" v-bind:checked="todo.done" @change="toggle(todo)">
-        {{todo.id}} {{ todo.name }} {{ todo.created }}
+        <span v-bind:class="{ done: todo.done }">{{ todo.name }} {{ todo.created }}</span>
         <button @click="remove(todo.id)">削除</button>
       </li>
     </ul>
@@ -57,6 +57,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+li > span.done{
+  text-decoration: line-through;
+}
 </style>
