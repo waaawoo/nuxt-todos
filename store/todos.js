@@ -2,6 +2,7 @@
 import firebase from '~/plugins/firebase'
 import { firestoreAction } from 'vuexfire'
 
+
 // DB設定
 const db = firebase.firestore()
 const todosRef = db.collection('todos')
@@ -42,4 +43,11 @@ export const actions = {
       done: !todo.done
     })
   })
+}
+
+// lodashでソート
+export const getters = {
+  orderdTodos: state => {
+    return _.sortBy(state.todos, 'created')
+  }
 }

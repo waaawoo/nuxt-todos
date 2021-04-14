@@ -64,7 +64,8 @@ export default {
   computed: {
     todos(){
       // 共通のtodosを読んでいる
-      return this.$store.state.todos.todos
+      // return this.$store.state.todos.todos
+      return this.$store.getters['todos/orderdTodos']
     }
   },
   filters: {
