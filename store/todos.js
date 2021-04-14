@@ -2,6 +2,7 @@
 import firebase from '~/plugins/firebase'
 import { firestoreAction } from 'vuexfire'
 
+
 // DB設定
 const db = firebase.firestore()
 const todosRef = db.collection('todos')
@@ -33,7 +34,7 @@ export const actions = {
   }),
   // 削除
   remove: firestoreAction((context, id) => {
-    todosRef.doc(id).celete()
+    todosRef.doc(id).delete()
   }),
   // チェックボックス todoの完了未完了を判定
   toggle: firestoreAction((context, todo)=> {
@@ -42,4 +43,11 @@ export const actions = {
       done: !todo.done
     })
   })
+}
+
+// lodashでソート
+export const getters = {
+  orderdTodos: state => {
+    return _.sortBy(state.todos, 'created')
+  }
 }
