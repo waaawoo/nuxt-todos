@@ -1,6 +1,8 @@
-<template>
-  <div>
 
+
+<template>
+  <div class="content">
+    <h1>TODOAPP</h1>
       <ul>
         <li v-for="todo in todos" :key="todo.id">
           <span v-if="todo.created">
@@ -22,13 +24,14 @@
       <!-- submit時にaddメソッドを発火 preventでページのロードを無効にしている -->
       <form action="" @submit.prevent="add">
         <input type="text" name="" id="" v-model="name">
-        <button>Add</button>
+        <button class="add-btn">Add</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import "~/assets/css/todos.scss"
 // momentのインポート
 import moment from "moment"
 export default {
@@ -77,8 +80,7 @@ export default {
 };
 </script>
 
-<style scoped>
-li > span > span.done{
-  text-decoration: line-through;
-}
+<style lang="scss" scoped>
+
+
 </style>
