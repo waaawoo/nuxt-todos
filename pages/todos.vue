@@ -1,7 +1,10 @@
 <template>
   <div>
     <ul>
-      <li v-for="todo in todos" :key="todo.id">{{ todo.done }} {{ todo.name }} {{ todo.created }} </li>
+      <li v-for="todo in todos" :key="todo.id">
+        {{todo.id}}{{ todo.done }} {{ todo.name }} {{ todo.created }}
+        <button @click="remove(todo.id)">削除</button>
+      </li>
     </ul>
     <div class="form">
       <!-- submit時にaddメソッドを発火 preventでページのロードを無効にしている -->
@@ -36,6 +39,9 @@ export default {
       this.$store.dispatch('todos/add', this.name)
       // 処理が終わったら入力値を空にする
       this.name = ""
+    },
+    remove(id){
+      this.$store.dispatch('todos/remove', id)
     }
   },
   computed: {

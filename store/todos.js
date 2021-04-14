@@ -33,7 +33,7 @@ export const actions = {
   }),
   // 削除
   remove: firestoreAction((context, id) => {
-    todosRef.doc(id).celete()
+    todosRef.doc(id).delete()
   }),
   // チェックボックス todoの完了未完了を判定
   toggle: firestoreAction((context, todo)=> {
