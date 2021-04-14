@@ -3,30 +3,31 @@
 <template>
   <div class="content">
     <h1>TODOAPP</h1>
-      <ul>
+      <div class="form">
+        <!-- submit時にaddメソッドを発火 preventでページのロードを無効にしている -->
+        <form action="" @submit.prevent="add">
+          <input type="text" name="" id="" v-model="name">
+          <button class="add-btn">Add</button>
+        </form>
+      </div>
+      <ul class="todos">
         <li v-for="todo in todos" :key="todo.id">
+          <!-- createdが登録されるまで表示しない -->
           <span v-if="todo.created">
-          <input type="checkbox" v-bind:checked="todo.done" @change="toggle(todo)">
-
-          <span v-bind:class="{ done: todo.done }">
-            {{ todo.name }}
-            <!-- filtre適応 -->
-            {{ todo.created.toDate() | detaFilter }}
-          </span>
-
-          <button @click="remove(todo.id)">削除</button>
+            <div>
+              <input type="checkbox" v-bind:checked="todo.done" @change="toggle(todo)">
+              <span class="dele" v-bind:class="{ done: todo.done }">
+                {{ todo.name }}
+                <!-- filtre適応 -->
+                {{ todo.created.toDate() | detaFilter }}
+              </span>
+            </div>
+            <div>
+              <button class="re-btn" @click="remove(todo.id)">削除</button>
+            </div>
           </span>
         </li>
       </ul>
-
-
-    <div class="form">
-      <!-- submit時にaddメソッドを発火 preventでページのロードを無効にしている -->
-      <form action="" @submit.prevent="add">
-        <input type="text" name="" id="" v-model="name">
-        <button class="add-btn">Add</button>
-      </form>
-    </div>
   </div>
 </template>
 
@@ -81,6 +82,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  .todos{
+    margin-top: 50px;
+    padding: 0;
+    width: 100%;
+    li{
+      list-style: none;
+      margin-top: 5px;
+      > span{
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+  .done{
+    background-color: gray;
+    transition: 1s;
+  }
 
 </style>
