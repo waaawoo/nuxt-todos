@@ -1,5 +1,8 @@
 <template>
   <div>
+    <ul>
+      <li v-for="todo in todos" :key="todo.id">{{ todo.done }} {{ todo.name }} {{ todo.created }} </li>
+    </ul>
     <div class="form">
       <!-- submit時にaddメソッドを発火 preventでページのロードを無効にしている -->
       <form action="" @submit.prevent="add">
@@ -33,6 +36,12 @@ export default {
       this.$store.dispatch('todos/add', this.name)
       // 処理が終わったら入力値を空にする
       this.name = ""
+    }
+  },
+  computed: {
+    todos(){
+      // 共通のtodosを読んでいる
+      return this.$store.state.todos.todos
     }
   },
 };
