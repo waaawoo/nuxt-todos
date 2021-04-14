@@ -1,3 +1,4 @@
+
 const pkg = require('./package')
 const webpack = require('webpack')
 
@@ -39,7 +40,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // dotenvを読み込む
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/style-resources'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -50,7 +52,7 @@ export default {
       new webpack.ProvidePlugin({
         '_': 'lodash'
       })
-    ]
+    ],
   },
 
 
