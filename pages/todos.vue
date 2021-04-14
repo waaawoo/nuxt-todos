@@ -1,12 +1,23 @@
 <template>
   <div>
-    <ul>
-      <li v-for="todo in todos" :key="todo.id">
-        <input type="checkbox" v-bind:checked="todo.done" @change="toggle(todo)">
-        <span v-bind:class="{ done: todo.done }">{{ todo.name }} {{ todo.created }}</span>
-        <button @click="remove(todo.id)">削除</button>
-      </li>
-    </ul>
+
+      <ul>
+        <li v-for="todo in todos" :key="todo.id">
+          <span v-if="todo.created">
+          <input type="checkbox" v-bind:checked="todo.done" @change="toggle(todo)">
+
+          <span v-bind:class="{ done: todo.done }">
+            {{ todo.name }}
+            <!-- filtre適応 -->
+            {{ todo.created.toDate() | detaFilter }}
+          </span>
+
+          <button @click="remove(todo.id)">削除</button>
+          </span>
+        </li>
+      </ul>
+
+
     <div class="form">
       <!-- submit時にaddメソッドを発火 preventでページのロードを無効にしている -->
       <form action="" @submit.prevent="add">
@@ -18,6 +29,8 @@
 </template>
 
 <script>
+// momentのインポート
+import moment from "moment"
 export default {
   // createdのタイミングでtodosの初期化
   created(){
@@ -54,11 +67,17 @@ export default {
       return this.$store.state.todos.todos
     }
   },
+  filters: {
+    // 日付フォーマット用filter
+    detaFilter(data){
+      return moment(data).format('YYYY/MM/DD HH:mm:ss')
+    }
+  }
 };
 </script>
 
 <style scoped>
-li > span.done{
+li > span > span.done{
   text-decoration: line-through;
 }
 </style>
